@@ -200,7 +200,7 @@
 (async () => {
     'use strict';
     if (window.top !== window.self) {return;};
-    if (window.location.hostname === 'bypass.vip' && window.location.pathname === '/userscript.html') {
+    if (window.location.hostname === 'bypass.vip' && window.location.pathname === '/userscript') {
         const urlParams = new URLSearchParams(window.location.search);
         const originalUrl = urlParams.get('url');
         if (originalUrl) {
