@@ -4,7 +4,6 @@
 // @version       1.4.5
 // @author        sang765
 // @description   Bypass ad-links using the bypass.vip API and get to your destination without ads!
-// @match         *://bypass.vip/userscript*
 // @match         *://mega-guy.com/*
 // @match         *://loot-link.com/*
 // @match         *://best-links.org/*
@@ -200,14 +199,6 @@
 (async () => {
     'use strict';
     if (window.top !== window.self) {return;};
-    if (window.location.hostname === 'bypass.vip' && window.location.pathname === '/userscript') {
-        const urlParams = new URLSearchParams(window.location.search);
-        const originalUrl = urlParams.get('url');
-        if (originalUrl) {
-            createOriginalUrlBox(originalUrl);
-        }
-        return;
-    }
     const config = {
         time: 10,
         key: '',
@@ -299,39 +290,6 @@
                 notification.remove();
             }
         }, 3000);
-    }
-
-    function createOriginalUrlBox(originalUrl) {
-        if (document.getElementById('original-url-box')) return;
-        const box = document.createElement('div');
-        box.id = 'original-url-box';
-        box.style.cssText = `
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: #fff;
-            color: #000;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            z-index: 10000;
-            max-width: 300px;
-            cursor: pointer;
-            font-family: Arial, sans-serif;
-            word-break: break-all;
-        `;
-        box.textContent = 'Original URL: ' + decodeURIComponent(originalUrl);
-        box.addEventListener('click', () => {
-            navigator.clipboard.writeText(decodeURIComponent(originalUrl)).then(() => {
-                box.textContent = 'Copied!';
-                setTimeout(() => {
-                    box.textContent = 'Original URL: ' + decodeURIComponent(originalUrl);
-                }, 2000);
-            }).catch(() => {
-                alert('Failed to copy');
-            });
-        });
-        document.body.appendChild(box);
     }
 
     function showError(message) {
