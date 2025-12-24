@@ -212,10 +212,6 @@
     // --- UTILS ---
     const isBypassSite = () => window.location.hostname === 'bypass.vip' && window.location.pathname.includes('userscript');
 
-    const isValidUrl = (url) => {
-        try { new URL(url); return true; } catch { return false; }
-    };
-
     function showError(message) {
         if (document.body) {
             document.body.innerHTML = `
