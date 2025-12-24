@@ -41,7 +41,7 @@ export default function RootLayout({
             <div className="flex items-center space-x-4">
               <a href="#home" className="hover:underline">Trang chủ</a>
               <a href="#domains" className="hover:underline">Tên miền</a>
-              <a href="https://github.com/username/ReBypass" className="hover:underline">GitHub</a>
+              <a href="https://github.com/sang765/ReBypass" className="hover:underline">GitHub</a>
               <ThemeToggle />
             </div>
           </nav>
@@ -51,7 +51,7 @@ export default function RootLayout({
         </main>
         <footer className="bg-gray-200 dark:bg-gray-800 text-center p-4">
           <p>&copy; 2024 ReBypass. Liên hệ: <a href="mailto:your@email.com" className="text-blue-600">your@email.com</a></p>
-          <p><a href="https://github.com/username/ReBypass" className="text-blue-600">GitHub Repository</a></p>
+          <p><a href="https://github.com/sang765/ReBypass" className="text-blue-600">GitHub Repository</a></p>
         </footer>
       </body>
     </html>

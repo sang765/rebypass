@@ -3,13 +3,13 @@
     "domain": "example.com",
     "description": "A sample domain for demonstration purposes.",
     "status": "supported",
-    "link": "https://github.com/username/ReBypass/raw/main/bypass-vip.user.js"
+    "link": "https://github.com/sang765/ReBypass/raw/main/bypass-vip.user.js"
   },
   {
     "domain": "google.com",
     "description": "Popular search engine domain.",
     "status": "supported",
-    "link": "https://github.com/username/ReBypass/raw/main/bypass-vip.user.js"
+    "link": "https://github.com/sang765/ReBypass/raw/main/bypass-vip.user.js"
   },
   {
     "domain": "facebook.com",
@@ -21,12 +21,12 @@
     "domain": "youtube.com",
     "description": "Video sharing platform.",
     "status": "supported",
-    "link": "https://github.com/username/ReBypass/raw/main/bypass-vip.user.js"
+    "link": "https://github.com/sang765/ReBypass/raw/main/bypass-vip.user.js"
   },
   {
     "domain": "github.com",
     "description": "Code hosting platform.",
     "status": "supported",
-    "link": "https://github.com/username/ReBypass/raw/main/bypass-vip.user.js"
+    "link": "https://github.com/sang765/ReBypass/raw/main/bypass-vip.user.js"
   }
 ]
