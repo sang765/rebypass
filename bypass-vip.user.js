@@ -192,6 +192,7 @@
 // @match         *://esohasl.net/*
 // @match         *://rbscripts.net/*
 // @match         *://link.rbscripts.net/*
+// @match         *://bypass.vip/userscript*
 // @downloadURL   https://raw.githubusercontent.com/sang765/ReBypass/main/bypass-vip.user.js
 // @updateURL     https://raw.githubusercontent.com/sang765/ReBypass/main/bypass-vip.user.js
 // @homepageURL   https://github.com/sang765/ReBypass
