@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src=".github/assets/logo.svg" alt="Logo" width="200">
+<img src=".github/assets/favicon-nobg-dark.png" alt="Logo" width="200">
 
 <h1>BYPASS.VIP Userscript (Remake)</h1>
 
