@@ -253,6 +253,8 @@
         safeMode: GM_getValue('safeMode', true)
     };
 
+    const waitTimes = GM_getValue('waitTimes', DEFAULT_WAIT_TIMES);
+
     // Menu commands for settings
     GM_registerMenuCommand('Toggle Advanced Time Mode', () => {
         const current = GM_getValue('advancedMode', true);
@@ -375,7 +377,7 @@
                 ">⚙️ Settings</button>
                 <div id="settingsDropdown" style="
                     display: none; position: absolute; top: 40px; right: 0; background: #1e1e1e;
-                    border: 1px solid #333; border-radius: 8px; padding: 15px; width: 250px;
+                    border: 1px solid #333; border-radius: 8px; padding: 15px; width: 250px; max-height: 500px; overflow-y: auto;
                     box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 2147483648;
                 ">
                     <label style="display: block; margin-bottom: 10px; color: var(--text-color);">
@@ -387,6 +389,17 @@
                     <label style="display: block; margin-bottom: 10px; color: var(--text-color);">
                         API Key: <input id="keyInput" type="text" value="${config.key}" style="width: 100%; padding: 5px; background: #333; color: white; border: 1px solid #555; border-radius: 4px;">
                     </label>
+                    <h4 style="margin: 10px 0 5px 0; color: var(--text-color); font-size: 0.9em;">Advanced Wait Times (seconds):</h4>
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-color); font-size: 0.8em;">url_shortener: <input id="time_url_shortener" type="number" value="${waitTimes.url_shortener}" style="width: 50px; padding: 2px; background: #333; color: white; border: 1px solid #555; border-radius: 4px;"></label>
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-color); font-size: 0.8em;">social_unlock: <input id="time_social_unlock" type="number" value="${waitTimes.social_unlock}" style="width: 50px; padding: 2px; background: #333; color: white; border: 1px solid #555; border-radius: 4px;"></label>
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-color); font-size: 0.8em;">redirect_hub: <input id="time_redirect_hub" type="number" value="${waitTimes.redirect_hub}" style="width: 50px; padding: 2px; background: #333; color: white; border: 1px solid #555; border-radius: 4px;"></label>
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-color); font-size: 0.8em;">lootlabs_ecosystem: <input id="time_lootlabs_ecosystem" type="number" value="${waitTimes.lootlabs_ecosystem}" style="width: 50px; padding: 2px; background: #333; color: white; border: 1px solid #555; border-radius: 4px;"></label>
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-color); font-size: 0.8em;">mega_hub: <input id="time_mega_hub" type="number" value="${waitTimes.mega_hub}" style="width: 50px; padding: 2px; background: #333; color: white; border: 1px solid #555; border-radius: 4px;"></label>
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-color); font-size: 0.8em;">leak_nsfw_hub: <input id="time_leak_nsfw_hub" type="number" value="${waitTimes.leak_nsfw_hub}" style="width: 50px; padding: 2px; background: #333; color: white; border: 1px solid #555; border-radius: 4px;"></label>
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-color); font-size: 0.8em;">paste_text_host: <input id="time_paste_text_host" type="number" value="${waitTimes.paste_text_host}" style="width: 50px; padding: 2px; background: #333; color: white; border: 1px solid #555; border-radius: 4px;"></label>
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-color); font-size: 0.8em;">community_discord: <input id="time_community_discord" type="number" value="${waitTimes.community_discord}" style="width: 50px; padding: 2px; background: #333; color: white; border: 1px solid #555; border-radius: 4px;"></label>
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-color); font-size: 0.8em;">random_obfuscated: <input id="time_random_obfuscated" type="number" value="${waitTimes.random_obfuscated}" style="width: 50px; padding: 2px; background: #333; color: white; border: 1px solid #555; border-radius: 4px;"></label>
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-color); font-size: 0.8em;">default: <input id="time_default" type="number" value="${waitTimes.default}" style="width: 50px; padding: 2px; background: #333; color: white; border: 1px solid #555; border-radius: 4px;"></label>
                     <button id="saveSettings" style="
                         width: 100%; padding: 8px; background: var(--primary-color); color: white; border: none; border-radius: 4px; cursor: pointer;
                         transition: background 0.3s;
@@ -483,7 +496,7 @@
 
             const currentDomain = window.location.hostname;
             const category = getDomainCategory(currentDomain);
-            const waitTime = config.advancedMode ? (DEFAULT_WAIT_TIMES[category] || DEFAULT_WAIT_TIMES.default) : config.globalTime;
+            const waitTime = config.advancedMode ? (waitTimes[category] || waitTimes.default) : config.globalTime;
 
             if (isBypassSite()) {
                 const targetUrl = urlParams.get('url');
@@ -539,9 +552,15 @@
                 const advancedMode = document.getElementById('advancedModeInput').checked;
                 const globalTime = parseInt(document.getElementById('timeInput').value);
                 const key = document.getElementById('keyInput').value;
+                const waitTimesNew = {};
+                for (const cat of Object.keys(DEFAULT_WAIT_TIMES)) {
+                    const val = parseInt(document.getElementById(`time_${cat}`).value);
+                    waitTimesNew[cat] = isNaN(val) ? DEFAULT_WAIT_TIMES[cat] : val;
+                }
                 GM_setValue('advancedMode', advancedMode);
                 GM_setValue('globalTime', globalTime);
                 GM_setValue('key', key);
+                GM_setValue('waitTimes', waitTimesNew);
                 settingsDropdown.style.display = 'none';
                 alert('Settings saved. Reload the page to apply changes.');
             });
